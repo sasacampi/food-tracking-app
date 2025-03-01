@@ -5,8 +5,15 @@ import { jwtVerify } from "jose";
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
 
+  if (
+    request.nextUrl.pathname.startsWith("/onboarding") ||
+    request.nextUrl.pathname.startsWith("/login")
+  ) {
+    return NextResponse.next();
+  }
+
   if (!token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/onboarding", request.url));
   }
 
   try {

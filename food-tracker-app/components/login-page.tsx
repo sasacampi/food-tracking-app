@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -31,7 +32,9 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Log In</h1>
+      {/* Centered TacoTrak Logo */}
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">TacoTrak</h1>
+
       <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-sm">
         <div>
           <Label htmlFor="email">Email</Label>
@@ -53,10 +56,19 @@ export default function LoginPage() {
             required
           />
         </div>
-        <Button type="submit" className="w-full">
+        {/* Blue Login Button */}
+        <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
           Log In
         </Button>
       </form>
+
+      {/* "Don't have an account? Sign up here" Link */}
+      <p className="mt-4 text-sm text-gray-600">
+        Don&apos;t have an account?{" "}
+        <Link href="/signup" className="text-blue-600 hover:underline">
+          Sign up here
+        </Link>
+      </p>
     </div>
   );
 }

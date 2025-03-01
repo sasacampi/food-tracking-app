@@ -11,6 +11,13 @@ const config = {
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-poppins)"],
+        mono: ["var(--font-geist-mono)"],
+      },
+    },
+
     container: {
       center: true,
       padding: "2rem",

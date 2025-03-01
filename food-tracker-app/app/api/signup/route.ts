@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import clientPromise from "@/lib/mongodb";
 import { User } from "@/models/User";
 
@@ -10,7 +10,6 @@ export async function POST(req: Request) {
     const client = await clientPromise;
     const db = client.db("foodtracker");
 
-    // Check if user already exists
     const existingUser = await db.collection("users").findOne({ email });
     if (existingUser) {
       return NextResponse.json(
@@ -25,15 +24,15 @@ export async function POST(req: Request) {
       email,
       password: hashedPassword,
       name,
-      weight: parseFloat(weight),
-      age: parseInt(age),
+      weight: Number(weight) || 0,
+      age: Number(age) || 0,
       gender,
     };
 
     await db.collection("users").insertOne(newUser);
 
     return NextResponse.json(
-      { message: "User created successfully" },
+      { success: true, message: "User created successfully" },
       { status: 201 }
     );
   } catch (error) {
