@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -22,6 +20,8 @@ export default function LoginPage() {
     });
 
     if (response.ok) {
+      const { token } = await response.json();
+      document.cookie = `token=${token}; path=/;`;
       router.push("/home");
     } else {
       // Handle error

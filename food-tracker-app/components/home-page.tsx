@@ -1,21 +1,26 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { CircularProgressBar } from "@/components/circular-progress-bar"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { CircularProgressBar } from "@/components/circular-progress-bar";
+import { Badge } from "@/components/ui/badge";
 
 export default function HomePage() {
   return (
     <div className="p-4 space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">Today</h1>
-        <Badge variant="outline" className="bg-blue-50 text-blue-700 hover:bg-blue-100">
+        <Badge
+          variant="outline"
+          className="bg-blue-50 text-blue-700 hover:bg-blue-100"
+        >
           March 1, 2025
         </Badge>
       </div>
 
       <Card className="border-none shadow-sm bg-white">
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg font-medium text-gray-800">Daily Progress</CardTitle>
+          <CardTitle className="text-lg font-medium text-gray-800">
+            Daily Progress
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-center py-4">
@@ -38,7 +43,9 @@ export default function HomePage() {
 
       <Card className="border-none shadow-sm bg-white">
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg font-medium text-gray-800">Macronutrients</CardTitle>
+          <CardTitle className="text-lg font-medium text-gray-800">
+            Macronutrients
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
@@ -46,28 +53,39 @@ export default function HomePage() {
               <span className="text-sm font-medium text-gray-700">Carbs</span>
               <span className="text-sm text-gray-500">150g / 250g</span>
             </div>
-            <Progress value={60} className="h-2 bg-blue-100" indicatorClassName="bg-blue-400" />
+            <Progress
+              value={60}
+              className="h-2 [&>div]:bg-blue-400 bg-blue-100"
+            />
           </div>
           <div>
             <div className="flex justify-between mb-1">
               <span className="text-sm font-medium text-gray-700">Protein</span>
               <span className="text-sm text-gray-500">85g / 120g</span>
             </div>
-            <Progress value={70} className="h-2 bg-blue-100" indicatorClassName="bg-blue-600" />
+            <Progress
+              value={70}
+              className="h-2 [&>div]:bg-blue-600 bg-blue-100"
+            />
           </div>
           <div>
             <div className="flex justify-between mb-1">
               <span className="text-sm font-medium text-gray-700">Fat</span>
               <span className="text-sm text-gray-500">45g / 65g</span>
             </div>
-            <Progress value={69} className="h-2 bg-blue-100" indicatorClassName="bg-blue-500" />
+            <Progress
+              value={69}
+              className="h-2 [&>div]:bg-blue-500 bg-blue-100"
+            />
           </div>
         </CardContent>
       </Card>
 
       <Card className="border-none shadow-sm bg-white">
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg font-medium text-gray-800">Today's Meals</CardTitle>
+          <CardTitle className="text-lg font-medium text-gray-800">
+            Today Meal
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
@@ -101,6 +119,5 @@ export default function HomePage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-

@@ -1,27 +1,31 @@
-import { NextResponse } from "next/server"
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
+import { NextResponse } from "next/server";
 
-// This should be replaced with a database call
-const users = [
-  { id: 1, email: "user@example.com", password: "$2b$10$8OxDEQvXHcj8LJCXQmt1KOd7Q1Iy0JYPf1Ej8Uy8MAWzGqLRHYwXi" }, // password is 'password'
-]
+export async function POST(request: Request) {
+  try {
+    const { email, password } = await request.json();
 
-export async function POST(req: Request) {
-  const { email, password } = await req.json()
+    if (email === "test@example.com" && password === "pass") {
+      // Generate a token (use a proper JWT library in production)
+      const token = "example-token";
 
-  const user = users.find((u) => u.email === email)
-  if (!user) {
-    return NextResponse.json({ error: "User not found" }, { status: 404 })
+      const response = NextResponse.json({ success: true });
+
+      response.cookies.set("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+      });
+
+      return response;
+    }
+
+    return NextResponse.json(
+      { message: "Invalid email or password" },
+      { status: 401 }
+    );
+  } catch (error) {
+    console.error("Login error:", error);
+    return NextResponse.json({ message: "An error occurred" }, { status: 500 });
   }
-
-  const match = await bcrypt.compare(password, user.password)
-  if (!match) {
-    return NextResponse.json({ error: "Invalid password" }, { status: 401 })
-  }
-
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: "1h" })
-
-  return NextResponse.json({ token })
 }
-
